@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    background-color: #blue;
+  }
+  .menu-container {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  .hex-wrapper {
+    display: inline-block;
+  }
+  .hex-row {
+    clear: left;
+  }
+  .shift {
+      margin-left: 132px;
+      margin-top: 76px;
+      position: absolute;
+  }
+  .hexagonEmpty {
+    float: left;
+    position: relative;
+    margin: 00px 0px;
+    width: 178px;
+    height: 150px;
+  /*   background-color: #ccc;
+    background-position: center center; */
+    z-index: 1;
+    /* Text styling */
+    line-height: 150px;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: 6px;
+    color: #000;
+    color: rgba(0, 0, 0, .5);
+    cursor: pointer;
+  /*   transition: color 500ms ease, text-shadow 500ms ease, background-color 500ms ease, -webkit-transform 1s ease-in-out; */
+  }
+  .hexagon {
+    float: left;
+    position: relative;
+    margin: 0px 0px;
+    width: 86px;
+    height: 150px;
+    background-color: #ccc;
+    background-position: center center;
+    z-index: 1;
+    /* Text styling */
+    line-height: 140px;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: 6px;
+    color: #000;
+    color: rgba(0, 0, 0, .5);
+    cursor: pointer;
+    transition: color 500ms ease, text-shadow 500ms ease, background-color 500ms ease, -webkit-transform 1s ease-in-out;
+  }
+  .hexagon:hover {
+    color: #fff;
+    text-shadow: 0 0 10px white;
+    background-color: #888;
+  }
+  .hexagon .face1,
+  .hexagon .face2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 86px;
+    height: 150px;
+    overflow: hidden;
+    background: inherit;
+    z-index: -1;
+    /* Keeps borders smooth in webkit */
+    backface-visibility: hidden;
+  }
+  .hexagon .face1:before,
+  .hexagon .face2:before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 100px;
+    background: inherit;
+  }
+  .hexagon .face1 { transform: rotate(60deg); }
+  .hexagon .face1:before {
+    left: 0;
+    transform-origin: left top;
+    transform: rotate(-60deg) translate(-120px, 0);
+  }
+  .hexagon .face2 { transform: rotate(-60deg); }
+  .hexagon .face2:before {
+    right: 0;
+    transform-origin: right top;
+    transform: rotate(40deg) translate(110px, 0);
+  }
+  
