@@ -1,0 +1,69 @@
+CREATE TABLE `doctor` (
+ `ID` int(11) NOT NULL,
+ `DrName` varchar(250) NOT NULL,
+ `Degree` varchar(250) NOT NULL,
+ `ScientificMajor` varchar(250) NOT NULL,
+ `Drphone` varchar(250) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `docusers` (
+ `ID` int(64) NOT NULL,
+ `firstname` varchar(64) NOT NULL,
+ `lastname` varchar(64) NOT NULL,
+ `username` varchar(64) NOT NULL,
+ `email` varchar(64) NOT NULL,
+ `password` varchar(64) NOT NULL,
+ `phone` int(64) NOT NULL,
+ `degree` varchar(64) NOT NULL,
+ `major` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `Equipment` (
+ `Ename` varchar(250) NOT NULL,
+ `Code` int(11) NOT NULL,
+ `PPM` int(11) NOT NULL,
+ `Specs` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `nurse` (
+ `NID` int(11) NOT NULL,
+ `Nname` varchar(250) NOT NULL,
+ `WorkingHours` int(11) NOT NULL,
+ `Nphone` varchar(250) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `nurusers` (
+ `ID` int(64) NOT NULL,
+ `firstname` varchar(64) NOT NULL,
+ `lastname` varchar(64) NOT NULL,
+ `username` varchar(64) NOT NULL,
+ `email` varchar(64) NOT NULL,
+ `password` varchar(64) NOT NULL,
+ `phone` int(64) NOT NULL,
+ `work_hr` int(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `infant` (
+ `Iname` varchar(250) NOT NULL,
+ `IID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `parent` (
+ `PID` int(11) NOT NULL,
+ `Fname` varchar(11) NOT NULL,
+ `Lname` varchar(11) NOT NULL,
+ `Pphone` int(11) NOT NULL,
+ `IID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `parusers` (
+ `ID` int(64) NOT NULL,
+ `firstname` varchar(64) NOT NULL,
+ `lastname` varchar(64) NOT NULL,
+ `username` varchar(64) NOT NULL,
+ `email` varchar(64) NOT NULL,
+ `password` varchar(64) NOT NULL,
+ `phone` int(64) NOT NULL,
+ `address` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
