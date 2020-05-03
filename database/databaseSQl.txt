@@ -76,3 +76,16 @@ CREATE TABLE RepairedBy
   FOREIGN KEY (Serial_number) REFERENCES Equipment(Serial_number),
   FOREIGN KEY (Agent_name) REFERENCES service_provider(Agent_name)
 );
+
+
+CREATE TABLE `users` 
+(
+ ID int(64) NOT NULL,
+ firstname varchar(64) NOT NULL,
+ lastname varchar(64) NOT NULL,
+ username varchar(64) NOT NULL,
+ email varchar(64) NOT NULL,
+ password varchar(64) NOT NULL,
+ phone int(64) NOT NULL,
+ 
+);
