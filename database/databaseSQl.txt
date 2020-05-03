@@ -1,0 +1,78 @@
+CREATE TABLE Equipment
+(
+  EqModel_number VARCHAR(50) NOT NULL,
+  Floor INT NOT NULL,
+  Department VARCHAR(50) NOT NULL,
+  Room INT NOT NULL,
+  Manufacturer VARCHAR(50) NOT NULL,
+  contact_Info VARCHAR NOT NULL,
+  Serial_number VARCHAR(50) NOT NULL,
+  InDay INT NOT NULL,
+  InMonth INT NOT NULL,
+  InYear INT NOT NULL,
+  Condition_code VARCHAR(50) NOT NULL,
+  work_performed_on_the_device VARCHAR(300) NOT NULL,
+  EqCost FLOAT NOT NULL,
+  Picture .jpg NOT NULL,
+  pdf_manual .pdf NOT NULL,
+  ExYear INT NOT NULL,
+  ExMonth INT NOT NULL,
+  PRIMARY KEY (Serial_number)
+);
+
+CREATE TABLE Spare_part
+(
+  SprName VARCHAR(50) NOT NULL,
+  SprModel_number VARCHAR(50) NOT NULL,
+  SprSerial_number VARCHAR(50) NOT NULL,
+  quantity INT NOT NULL,
+  SprCost FLOAT NOT NULL,
+  contact_info VARCHAR(300) NOT NULL,
+  PRIMARY KEY (SprSerial_number)
+);
+
+CREATE TABLE service_provider
+(
+  Contact_info VARCHAR(50) NOT NULL,
+  Response_time VARCHAR(50) NOT NULL,
+  Agent_name VARCHAR(50) NOT NULL,
+  PRIMARY KEY (Agent_name)
+);
+
+CREATE TABLE Maintenance
+(
+  Repair_cost FLOAT NOT NULL,
+  Daily_inspection_assessment VARCHAR(300) NOT NULL,
+  PM_assessment VARCHAR(300) NOT NULL,
+  Equipment_downtime VARCHAR(50) NOT NULL,
+  PM_schedule_date DATE NOT NULL,
+  ticket_Id INT NOT NULL,
+  PRIMARY KEY (ticket_Id)
+);
+
+CREATE TABLE spares
+(
+  Serial_number VARCHAR(50) NOT NULL,
+  SprSerial_number VARCHAR(50) NOT NULL,
+  PRIMARY KEY (Serial_number, SprSerial_number),
+  FOREIGN KEY (Serial_number) REFERENCES Equipment(Serial_number),
+  FOREIGN KEY (SprSerial_number) REFERENCES Spare_part(SprSerial_number)
+);
+
+CREATE TABLE Repair
+(
+  Serial_number VARCHAR(50) NOT NULL,
+  ticket_Id INT NOT NULL,
+  PRIMARY KEY (Serial_number, ticket_Id),
+  FOREIGN KEY (Serial_number) REFERENCES Equipment(Serial_number),
+  FOREIGN KEY (ticket_Id) REFERENCES Maintenance(ticket_Id)
+);
+
+CREATE TABLE RepairedBy
+(
+  Serial_number VARCHAR(50) NOT NULL,
+  Agent_name VARCHAR(50) NOT NULL,
+  PRIMARY KEY (Serial_number, Agent_name),
+  FOREIGN KEY (Serial_number) REFERENCES Equipment(Serial_number),
+  FOREIGN KEY (Agent_name) REFERENCES service_provider(Agent_name)
+);
