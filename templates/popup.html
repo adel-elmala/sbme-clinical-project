@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+  <link rel= 'stylesheet' href = '../static/popup.css'>
+</head>
+<body>
+  <button class="btn open-form" onclick="myFunction()">Open form</button>
+  <button class="btn reset-form">Reset form</button>
+  <div class="form-popup" id="myPopup">
+			<div class="container form-wrapper">
+				<button class="btn close-form">Close</button>
+				<form id="my-form" novalidate="novalidate">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h1 class="form-title">Pop-up form</h1>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="name">Name</label>
+							<input type="text" class="form-control" id="name" name="name" required="">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="email">E-mail</label>
+							<input type="text" class="form-control" id="email" name="email" required="">
+						</div>
+					</div>
+          <div class="row">
+            <div class="form-group col-md-12">
+							<label for="something">Something</label>
+							<textarea name="something" class="form-control" id=""></textarea>
+						</div>
+          </div>
+					
+					<div class="form-check">
+						<label>
+						<input type="checkbox" name="formcheck" checked="" class="checkfz" required=""> Submit<br>
+						</label>
+					</div>
+					<button type="submit" class="btn send-form">Send</button>
+				</form>
+			</div>
+		</div>
+  <div class="success-message">
+    <h1>You success reset this form</h1>
+
+  </div>
+
+  <script>
+    // When the user clicks on div, open the popup
+    function myFunction() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
+    }
+    </script>
+    
+<script src = '../static/popup.js'></script>
+</body>
+</html>

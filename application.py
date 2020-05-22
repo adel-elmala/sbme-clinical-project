@@ -3,7 +3,8 @@ from cs50 import SQL
 from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_session import Session
 from tempfile import mkdtemp
-import mysql.connector, json, json2table, json2html
+# import mysql.connector, json, json2table, json2html
+import mysql.connector
 from mysql.connector import errorcode
 
 arr = ['Name', 'Depatment', 'Manufactrer', 'Model', 'Serial Number', 'Manufacturer Country',

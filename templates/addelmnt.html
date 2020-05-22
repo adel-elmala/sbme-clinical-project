@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="../static/testapp.css">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+        <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"> -->
+        <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Syncopate" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+
+    <title>Equipment-CMMS</title>
+  </head>
+  <body>
+    <nav class="nav3">
+    
+      
+      
+
+      <a href="{{ url_for('home') }}">HOME</a>
+        <a href="{{ url_for('signin') }}">SIGNIN</a>
+        
+        <a href="{{ url_for('contact_form') }}">CONTACT </a>
+
+      <div id="indicator"></div>
+    </nav>
+
+    
+    <div class="content">
+      <div class="containers">
+        <h1>Equipment-CMMS</h1>
+       
+        <div class="contr" >
+             
+                <h2> Add Equipment</h2>
+                <form class="frm" action={{ url_for('signup') }} method="POST">
+                  <div>
+                    <fieldset class="frm-fieldset ui-input __first">
+                      <input type="text" id="EqName" tabindex="0" name="EqName" />
+                      <label for="EqName" >
+                        <span data-text="Equipment name">Equipment name</span>
+                      </label>
+                    </fieldset>
+                  </div>
+
+                  <div>
+                  <fieldset class="frm-fieldset ui-input __second">
+                        <input type="text" id="Department" tabindex="0" name="Department" />
+                        <label for="Department">
+                          <span data-text="Department">Department</span>
+                        </label>
+                      </fieldset>
+                    </div>
+                    <div>
+                  <fieldset class="frm-fieldset ui-input __third">
+                        <input type="text" id="Manufactrer" tabindex="0" name="Manufactrer" />
+                        <label for="Manufactrer">
+                          <span data-text="Manufactrer">Manufactrer</span>
+                        </label>
+                      </fieldset>
+                    </div>
+                    <div>
+                      <fieldset class="frm-fieldset ui-input __fourth">
+                            <input type="text" id="Model" name="Model" />
+                            <label for="Model">
+                              <span data-text="Model">Model</span>
+                            </label>
+                          </fieldset>
+                        </div>
+                        <div>
+                      <fieldset class="frm-fieldset ui-input __fifth">
+                        <input type="SerialNumber" id="SerialNumber" name="SerialNumber" />
+                        <label for="SerialNumber">
+                          <span data-text="SerialNumber">Serial Number</span>
+                        </label>
+                      </fieldset>
+                    </div>
+                    <div>
+                    <fieldset class="frm-fieldset ui-input __fifth">
+                      <input type="Country" id="Country" name="Country" />
+                      <label for="Country">
+                        <span data-text="Country">Manufacturer Country</span>
+                      </label>
+                    </fieldset>
+
+
+                    <fieldset class="frm-fieldset ui-input __fifth">
+                        <input type="InDate" id="InDate" name="InDate" />
+                        <label for="InDate">
+                          <span data-text="InDate">Installation Date</span>
+                        </label>
+                      </fieldset>
+                      <fieldset class="frm-fieldset ui-input __fifth">
+                        <input type="OpDate" id="OpDate" name="OpDate" />
+                        <label for="OpDate">
+                          <span data-text="OpDate">Operation Date</span>
+                        </label>
+                      </fieldset>
+                      <fieldset class="frm-fieldset ui-input __fifth">
+                        <input type="Period" id="Period" name="Period" />
+                        <label for="Period">
+                          <span data-text="Period">Warranty Period</span>
+                        </label>
+                      </fieldset>
+                      <fieldset class="frm-fieldset ui-input __fifth">
+                        <input type="Supplier" id="Supplier" name="Supplier" />
+                        <label for="Supplier">
+                          <span data-text="Supplier">Supplier</span>
+                        </label>
+                      </fieldset>
+                      <fieldset class="frm-fieldset ui-input __fifth">
+                        <input type="Price" id="Price" name="Price" />
+                        <label for="Price">
+                          <span data-text="Price">Price</span>
+                        </label>
+                      </fieldset>
+                      <fieldset class="frm-fieldset ui-input __fifth">
+                        <input type="Company" id="Company" name="Company" />
+                        <label for="Company">
+                          <span data-text="Company">Maintainance Company</span>
+                        </label>
+                      </fieldset>
+                      <fieldset class="frm-fieldset ui-input __fifth">
+                        <input type="CType" id="CType" name="CType" />
+                        <label for="CType">
+                          <span data-text="CType">Maintainance Contract Type</span>
+                        </label>
+                      </fieldset>
+                      <fieldset class="frm-fieldset ui-input __fifth">
+                        <input type="Cdate" id="Cdate" name="Cdate" />
+                        <label for="Cdate">
+                          <span data-text="Cdate">Start/End Date of Contract</span>
+                        </label>
+                      </fieldset>
+                      <fieldset class="frm-fieldset ui-input __fifth">
+                        <input type="RName" id="RName" name="RName" />
+                        <label for="RName">
+                          <span data-text="RName">Recipient Name</span>
+                        </label>
+                      </fieldset>
+                      <fieldset class="frm-fieldset ui-input __fifth">
+                        <input type="Rphone" id="Rphone" name="Rphone" />
+                        <label for="Rphone">
+                          <span data-text="Rphone">Recipient Phone</span>
+                        </label>
+                      </fieldset>
+                     
+                  </div>
+                  
+                
+                  
+                   
+                                    <!--USER VALIDATION HERE -->
+                  <div class="frm-footer">
+                    <button class="btn" type="submit" href="http://127.0.0.1:5000/???">Add</button>
+                  </div>
+                                     
+                  
+                </form>
+              </div>
+
+              
+    </div>
+    </div>
+    
+    <script type="text/javascript" src="../styles/app.js"></script>
+  </body>
+</html>
