@@ -19,7 +19,11 @@
   <body>
     <nav class = "nav3">
       <a href="{{ url_for('home') }}">HOME</a>
+      {% if loggedin %}
+      <a href="{{ url_for('signout') }}">SIGNOUT</a>
+      {% else %}
       <a href="{{ url_for('signin') }}">SIGNIN</a>
+      {% endif %}
       
       <a href="{{ url_for('contact_form') }}">CONTACT </a>
       <div id="indicator"></div>

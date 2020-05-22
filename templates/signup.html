@@ -38,10 +38,10 @@
         <div class="contr" >
              
                 <h2> Sign Up</h2>
-                <form class="frm" action="http://127.0.0.1:5000/signup" method="POST">
+                <form class="frm" action={{ url_for('signup') }} method="POST">
                   <div>
                     <fieldset class="frm-fieldset ui-input __first">
-                      <input type="text" id="Firstname" tabindex="0" name="qwe" />
+                      <input type="text" id="Firstname" tabindex="0" name="firstname" />
                       <label for="Firstname" >
                         <span data-text="Firstname">Firstname</span>
                       </label>
@@ -50,7 +50,7 @@
 
                   <div>
                   <fieldset class="frm-fieldset ui-input __second">
-                        <input type="text" id="Lastname" tabindex="0" name="asd" />
+                        <input type="text" id="Lastname" tabindex="0" name="lastname" />
                         <label for="Lastname">
                           <span data-text="Lastname">Lastname</span>
                         </label>
@@ -58,7 +58,7 @@
                     </div>
                     <div>
                   <fieldset class="frm-fieldset ui-input __third">
-                        <input type="text" id="username" tabindex="0" name="zxc" />
+                        <input type="text" id="username" tabindex="0" name="username" />
                         <label for="username">
                           <span data-text="Username">Username</span>
                         </label>
@@ -66,7 +66,7 @@
                     </div>
                     <div>
                       <fieldset class="frm-fieldset ui-input __fourth">
-                            <input type="text" id="email" name="rty" />
+                            <input type="text" id="email" name="email" />
                             <label for="email">
                               <span data-text="email">email</span>
                             </label>
@@ -74,12 +74,20 @@
                         </div>
                         <div>
                       <fieldset class="frm-fieldset ui-input __fifth">
-                        <input type="password" id="password" name="fgh" />
+                        <input type="password" id="password" name="password" />
                         <label for="password">
                           <span data-text="Password">Password</span>
                         </label>
                       </fieldset>
                     </div>
+                    <div>
+                    <fieldset class="frm-fieldset ui-input __fifth">
+                      <input type="phone" id="phone" name="phone" />
+                      <label for="phone">
+                        <span data-text="phone">Phone</span>
+                      </label>
+                    </fieldset>
+                  </div>
                   
                 
                   
@@ -95,20 +103,8 @@
 
               
     </div>
-   
-
     </div>
     
-
-
-
-
-
-
-
-
-
-
     <script type="text/javascript" src="../styles/app.js"></script>
   </body>
 </html>

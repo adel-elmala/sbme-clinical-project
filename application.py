@@ -3,15 +3,19 @@ from cs50 import SQL
 from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_session import Session
 from tempfile import mkdtemp
-import mysql.connector, json,json2table,json2html
+import mysql.connector, json, json2table, json2html
 from mysql.connector import errorcode
 
-
+arr = ['Name', 'Depatment', 'Manufactrer', 'Model', 'Serial Number', 'Manufacturer Country',
+ 'In Date', 'Operation Date', 'Warranty Period', 'Supplier', 'Price', 'Maintainance Company',
+  'Mainyainance Contract Type', 'Start/End Date of Contract', 'Recipient Name', 'Recipient Phone']
 
 app = Flask(__name__)
  
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.secret_key = 'super secret key'
+app.config['SESSION_TYPE'] = 'filesystem'
  
 #set db as global variable
 db = ""
@@ -20,21 +24,22 @@ mydb = mysql.connector.connect(
   host="localhost",
   user="root",
   passwd="mysql",
-  database="NEONATAL"
+  database="mydata"
 )
 db = mydb.cursor()
 
 def check_logged_in():
-    db.execute("SELECT * FROM users WHERE username = :username AND password = :password LIMIT 1",
-               username = session.get("username"),password = session.get("password"))
-    data = db.fetchone()
-    if data is not None:
-        return render_template("home.html")
-    return True
+	session.get('username')
+	v = (session.get("username"), session.get("password"))
+	db.execute("SELECT * FROM USERS WHERE USERNAME = (%s) AND PASSWORD = (%s) LIMIT 1", v)
+	data = db.fetchone()
+	if data is not None:
+		return True
+	return False
 
 @app.route("/")
 def home():
-	return render_template("home.html")
+	return render_template("home.html", loggedin=check_logged_in())
 
 @app.route("/signin", methods = ["GET", "POST"])
 def signin():
@@ -42,171 +47,64 @@ def signin():
 	if request.method == "GET":
 		return render_template("signin.html", message = "")
 	elif request.method == "POST":	
-		name = request.form.get("ussname")
-		password = request.form.get("psswd")
-		v = (name,)
-		db.execute("SELECT * FROM `docusers` WHERE `username` = (%s)", v)
+		username = request.form.get("username")
+		password = request.form.get("password")
+		v = (username, password)
+		db.execute("SELECT * FROM `USERS` WHERE `USERNAME` = (%s) AND `PASSWORD` = (%s)", v)
 		data = db.fetchone()
+		session['username'] = username
+		session['password'] = password
 		if data is not None:
-			if data[5] == password:
-				return render_template("doctors.html")
-		db.execute("SELECT * FROM `nurusers` WHERE `username` = (%s)", v)
-		data = db.fetchone()
-		if data is not None:
-			if data[5] == password:
-				return render_template("nurses.html")
-		db.execute("SELECT * FROM `parusers` WHERE `username` = (%s)", v)
-		data = db.fetchone()
-		if data is not None:
-			if data[5] == password:
-				return render_template("parents.html")
+			return redirect(url_for('home'))
 		return render_template("signin.html", message = "wrong username or password")
 
 
-@app.route("/signupdoc", methods = ["GET", "POST"])
-def signupdoc():
+@app.route("/signup", methods = ["GET", "POST"])
+def signup():
 	if request.method == "GET":
-		return render_template("signupdoc.html")
+		return render_template("signup.html")
 	elif request.method == "POST":
-		Fname = request.form.get("fname")
-		Lname = request.form.get("lname")
-		username = request.form.get("ussname")
-		email = request.form.get("mail")
-		password = request.form.get("psswd")
-		phone = request.form.get("phne")
-		identity = request.form.get("ssn")
-		major = request.form.get("mjr")
-		degree = request.form.get("dgre")
-		sql = "INSERT INTO docusers (ID, firstname,lastname, username, email, password, phone, degree, major) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-		val = (identity, Fname, Lname, username, email, password, phone, degree, major)
+		Fname = request.form.get("firstname")
+		Lname = request.form.get("lastname")
+		username = request.form.get("username")
+		email = request.form.get("email")
+		password = request.form.get("password")
+		phone = request.form.get("phone")
+		sql = "INSERT INTO USERS (FIRSTNAME,LASTNAME, USERNAME, EMAIL, PASSWORD, PHONE) VALUES (%s, %s, %s, %s, %s, %s)"
+		val = (Fname, Lname, username, email, password, phone)
 		db.execute(sql, val)
 		mydb.commit()  
-		return render_template("thanks.html")
-
-
-@app.route("/signupnur", methods = ["GET", "POST"])
-def signupnur():
-	if request.method == "GET":
-		return render_template("signupnur.html")
-	elif request.method == "POST":
-		Fname = request.form.get("fname")
-		Lname = request.form.get("lname")
-		username = request.form.get("ussname")
-		email = request.form.get("mail")
-		password = request.form.get("psswd")
-		phone = request.form.get("phne")
-		identity = request.form.get("ssn")
-		work_hr = request.form.get("wrk_hr")
-		sql = "INSERT INTO nurusers (ID, firstname, lastname, username, email, password, phone, work_hr) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-		val = (identity, Fname, Lname, username, email, password, phone, work_hr)
-		db.execute(sql, val)
-		mydb.commit()  
-		return render_template("thanks.html")
-
-
-@app.route("/signuppar", methods = ["GET", "POST"])
-def signuppar():
-	if request.method == "GET":
-		return render_template("signuppar.html")
-	elif request.method == "POST":
-		Fname = request.form.get("fname")
-		Lname = request.form.get("lname")
-		username = request.form.get("ussname")
-		email = request.form.get("mail")
-		password = request.form.get("psswd")
-		phone = request.form.get("phne")
-		identity = request.form.get("ssn")
-		address = request.form.get("adrs")
-		sql = "INSERT INTO parusers (ID, firstname,lastname, username, email, password, phone, address) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-		val = (identity, Fname, Lname, username, email, password, phone, address)
-		db.execute(sql, val)
-		mydb.commit()  
-		return render_template("thanks.html")
+		return redirect(url_for('signin'))
 
 @app.route("/contact_form", methods = ["GET", "POST"])
 def contact_form():
 	if request.method == "GET":
-		return render_template("contact_form.html")
-	msg = request.form.get("message")
-	return render_template("thanks.html", "contacting us!")
+		return render_template("contact_form.html", loggedin=check_logged_in())
+
+@app.route("/signout")
+def signout():
+	session['username'] = None
+	session['password'] = None
+	return redirect(url_for('home'))
+
+def getData(dep : str):
+	v = (dep,)
+	db.execute("SELECT * FROM `EQUIPMENT` WHERE `DEPARTMENT` = (%s)", v)
+	data = db.fetchall()
+	return render_template("tables.html", data=data, loggedin=check_logged_in(), arr=arr)
+
+@app.route("/cardiac")
+def cardiac():
+	return getData("Cardiac")
+
+@app.route("/chatheter")
+def chatheter():
+	return getData("Chatheter")
 
 
-# my part
-@app.route("/doctors", methods = ["GET", "POST"])
-def doctors():
-	if request.method == "GET":
-		db.execute("SELECT * FROM doctor")
-		row_headers=[x[0] for x in db.description]
-		myresult = db.fetchall()
-		json_data=[]
-		for result in myresult:
-			json_data.append(dict(zip(row_headers,result)))
-		jsonfile = json.dumps(json_data)
-		return (jsonfile)
-		
-		# return render_template("doctors.html")
-
-	# return render_template("thankyou.html", "contacting us!")
-@app.route("/infants", methods = ["GET", "POST"])
-def infants():
-	if request.method == "GET":
-		db.execute("SELECT * FROM infant")
-		row_headers=[x[0] for x in db.description]
-		myresult = db.fetchall()
-		json_data=[]
-		for result in myresult:
-			json_data.append(dict(zip(row_headers,result)))
-		jsonfile = json.dumps(json_data)
-		return (jsonfile)
-@app.route("/parents", methods = ["GET", "POST"])
-def parents():
-	if request.method == "GET":
-		db.execute("SELECT * FROM parent")
-		row_headers=[x[0] for x in db.description]
-		myresult = db.fetchall()
-		json_data=[]
-		for result in myresult:
-			json_data.append(dict(zip(row_headers,result)))
-		jsonfile = json.dumps(json_data)
-		return (jsonfile)
-
-@app.route("/nurses", methods = ["GET", "POST"])
-def nurses():
-	if request.method == "GET":
-		db.execute("SELECT * FROM nurse")
-		row_headers=[x[0] for x in db.description]
-		myresult = db.fetchall()
-		json_data=[]
-		for result in myresult:
-			json_data.append(dict(zip(row_headers,result)))
-		jsonfile = json.dumps(json_data)
-		return (jsonfile)
-
-
-
-
-
-
-@app.route("/Equipment", methods = ["GET", "POST"])
-def Equipment():
-	if request.method == "GET":
-		db.execute("SELECT * FROM Equipment")
-		row_headers=[x[0] for x in db.description]
-		myresult = db.fetchall()
-		json_data=[]
-		for result in myresult:
-			json_data.append(dict(zip(row_headers,result)))
-		jsonfile = json.dumps(json_data)
-		return (jsonfile)
-
-
-
-
-
-# end
-
-
-
+@app.route("/dental")
+def dental():
+	return getData("Dental")
 
 if __name__ == "__main__":
 	app.run(debug = True)
