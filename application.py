@@ -77,35 +77,142 @@ def signup():
 		mydb.commit()  
 		return redirect(url_for('signin'))
 
-@app.route("/contact_form", methods = ["GET", "POST"])
-def contact_form():
-	if request.method == "GET":
-		return render_template("contact_form.html", loggedin=check_logged_in())
-
-@app.route("/signout")
-def signout():
-	session['username'] = None
-	session['password'] = None
-	return redirect(url_for('home'))
-
 def getData(dep : str):
 	v = (dep,)
 	db.execute("SELECT * FROM `EQUIPMENT` WHERE `DEPARTMENT` = (%s)", v)
 	data = db.fetchall()
-	return render_template("tables.html", data=data, loggedin=check_logged_in(), arr=arr)
+	return render_template("tables.html", data=data, arr=arr, dep=dep)
 
 @app.route("/cardiac")
 def cardiac():
-	return getData("Cardiac")
+	return getData("cardiac")
 
-@app.route("/chatheter")
-def chatheter():
-	return getData("Chatheter")
+@app.route("/chathetar")
+def chathetar():
+	return getData("chathetar")
 
 
 @app.route("/dental")
 def dental():
-	return getData("Dental")
+	return getData("dental")
+
+def get(s : str):
+	value = request.form.get(s)
+	if value == None:
+		value = ""
+	return value
+
+@app.route("/addelement", methods=["GET", "POST"])
+def addElement():
+	if request.method == "GET":
+		return render_template("addelmnt.html", loggedin=check_logged_in())
+	elif request.method == "POST":
+		sql = ("INSERT INTO EQUIPMENT (DEPARTMENT, ID, SERIAL_NUMBER, MANUFACTURER, MODEL,"
+			  " INDATE, OPERATION_DATE, SUPPLIER, WARRANTY_PERIOD, PRICE, MAINTAINANCE_COMPANY,"
+			  " MAINTAINANCE_CONTRACT_TYPE, START_END_CONTRACT_DATE, RECIPIENT_NAME,"
+			  " RECIPIENT_PHONE, MANUFACTURER_COUNTRY) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s,"
+			  " %s, %s, %s, %s, %s, %s, %s)")
+		val = (get("department"), get("eqName"), get("serialNumber"), get("manufacturer"),
+		get("model"), get("inDate"), get("opDate"), get("supplier"), get("period"), get("price"),
+		get("company"), get("cType"), get("cDate"), get("rName"), get("rPhone"), get("country"))
+		db.execute(sql, val)
+		mydb.commit()
+		return render_template("addelmnt.html", loggedin=check_logged_in(), message="Equipment Added successfully!")
+
+
+def report(dep : str, reportType):
+	v = (dep, )
+	print(reportType)
+	db.execute("SELECT * FROM `{}` WHERE `DEPARTMENT` = (%s)".format(reportType), v)
+	data = db.fetchall()
+	rows = []
+	arr = []
+	arr2 = []
+	ids = []
+	lens = []
+	i = 0
+	while i < len(data):
+		temp = []
+		temp2 = []
+		last = data[i][2]
+		arr.append(last)
+		arr2.append(data[i][1])
+		while i < len(data) and last == data[i][2]:
+			temp.append(data[i][3])
+			temp2.append(data[i][2] + str(i))
+			ids.append(temp2)
+			i += 1
+		lens.append(len(temp))
+		rows.append(temp)
+	return render_template("Checkform.html", dep=dep, rows=rows, lens=lens, arr=arr, len=len(rows), arr2=arr2, reportType=reportType, ids=ids)
+
+def maintainanceReport(dep : str, reportType):
+	v = (dep, )
+	db.execute("SELECT * FROM `{}` WHERE `DEPARTMENT` = (%s)".format(reportType), v)
+	data = db.fetchall()
+	arr = []
+	arr2 = []
+	i = 0
+	while i < len(data):
+		last = data[i][2]
+		arr.append(last)
+		arr2.append(data[i][1])
+		while i < len(data) and last == data[i][2]:
+			i += 1
+	for i in range(len(arr)):
+		sql = ("INSERT INTO MAINTANANCE_REPORTS (DEPARTMENT, EQUIPMENT_SERIAL_NUMBER,"
+			   " EQUIPMENT_NAME, DATA) VALUES (%s, %s, %s, %s);")
+		val = (dep, arr2[i], arr[i], request.form.get(arr[i]))
+		db.execute(sql, val)
+		mydb.commit()
+	if reportType[0] == 'S':
+		return redirect(url_for(dep + 'Sterilizatio'))
+	else:
+		return redirect(url_for(dep + 'PPMReports'))
+
+@app.route("/cardiac/ppmreport", methods = ["GET", "POST"])
+def cardiacPPMReports():
+	if request.method == "GET":
+		return report("cardiac", 'PPM_REPORTS')
+	elif request.method == "POST":
+		return maintainanceReport("cardiac", 'PPM_REPORTS')
+
+@app.route("/chathetar/ppmreport", methods = ["GET", "POST"])
+def chathetarPPMReports():
+	if request.method == "GET":
+		return report("chathetar", 'PPM_REPORTS')
+	elif request.method == "POST":
+		return maintainanceReport("chathetar", 'PPM_REPORTS')
+
+@app.route("/dental/ppmreport", methods = ["GET", "POST"])
+def dentalPPMReports():
+	if request.method == "GET":
+		return report("dental", 'PPM_REPORTS')
+	elif request.method == "POST":
+		return maintainanceReport("dental", 'PPM_REPORTS')
+
+@app.route("/cardiac/sterilization", methods = ["GET", "POST"])
+def cardiacSterilization():
+	if request.method == "GET":
+		return report("cardiac", 'STERILIZATION')
+	elif request.method == "POST":
+		return maintainanceReport("cardiac", 'STERILIZATION')
+
+@app.route("/chathetar/sterilization", methods = ["GET", "POST"])
+def chathetarSterilization():
+	if request.method == "GET":
+		return report("chathetar", 'STERILIZATION')
+	elif request.method == "POST":
+		return maintainanceReport("chathetar", 'STERILIZATION')
+
+@app.route("/dental/sterilization", methods = ["GET", "POST"])
+def dentalSterilization():
+	if request.method == "GET":
+		return report("dental", 'STERILIZATION')
+	elif request.method == "POST":
+		return maintainanceReport("dental", 'STERILIZATION')
+
+
 
 if __name__ == "__main__":
 	app.run(debug = True)

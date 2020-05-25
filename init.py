@@ -31,9 +31,8 @@ except mysql.connector.Error as err:
 
 TABLES = {}
 
-
 TABLES['USERS'] = ("CREATE TABLE `USERS` ("
-                   "FIRSTNAME varchar(64) NOT NULL,"
+                   " FIRSTNAME varchar(64) NOT NULL,"
                    " LASTNAME varchar(64) NOT NULL,"
                    " USERNAME varchar(64) NOT NULL,"
                    " EMAIL varchar(64) NOT NULL,"
@@ -41,23 +40,29 @@ TABLES['USERS'] = ("CREATE TABLE `USERS` ("
                    " PHONE VARCHAR(64) NOT NULL"
                    " );")
 
-TABLES['SERVICE_PROVIDER'] = ("CREATE TABLE SERVICE_PROVIDER("
-                   "PROVIDER_NAME VARCHAR(50) NOT NULL,"
-                   " PHONE_NUMBER VARCHAR(50) NOT NULL,"
-                   " EMAIL VARCHAR(50) NOT NULL,"
-                   " AGENT_NAME VARCHAR(50) NOT NULL,"
-                   " PRIMARY KEY (PROVIDER_NAME));")
+TABLES['PPM_REPORT'] = ("CREATE TABLE PPM_REPORTS("
+                         " DEPARTMENT VARCHAR(50) NOT NULL,"
+                         " EQUIPMENT_SERIAL_NUMBER VARCHAR(50) NOT NULL,"
+                         " EQIPMENT_NAME VARCHAR(50) NOT NULL,"
+                         " DATA VARCHAR(1000) NOT NULL"
+                         " );")
 
-TABLES['SPARE_PARTS'] = ("CREATE TABLE SPARE_PARTS("
-                         "SPARE_NAME VARCHAR(50) NOT NULL,"
-                         " SERIAL_NUMBER VARCHAR(50) NOT NULL,"
-                         " QUANTITY INT NOT NULL,"
-                         " SPARE_PRICE FLOAT NOT NULL,"
-                         " SPARE_MANUFACTURER VARCHAR(300) NOT NULL,"
-                         " PRIMARY KEY (SERIAL_NUMBER));")
+TABLES['STERILIZATION_REPORT'] = ("CREATE TABLE STERILIZATION("
+                         " DEPARTMENT VARCHAR(50) NOT NULL,"
+                         " EQUIPMENT_SERIAL_NUMBER VARCHAR(50) NOT NULL,"
+                         " EQIPMENT_NAME VARCHAR(50) NOT NULL,"
+                         " DATA VARCHAR(1000) NOT NULL"
+                         " );")
 
+TABLES['MAINTAINANCE_REPORT'] = ("CREATE TABLE MAINTANANCE_REPORTS("
+                         " DEPARTMENT VARCHAR(50) NOT NULL,"
+                         " EQUIPMENT_SERIAL_NUMBER VARCHAR(50) NOT NULL,"
+                         " EQUIPMENT_NAME VARCHAR(50) NOT NULL,"
+                         " DATA VARCHAR(3000) NOT NULL"
+                         " );")
+                         
 TABLES['EQUIPMENT'] = ("CREATE TABLE EQUIPMENT("
-                       " ID VARCHAR(50) NOT NULL,"
+                       " NAME VARCHAR(50) NOT NULL,"
                        " DEPARTMENT VARCHAR(50) NOT NULL,"
                        " MANUFACTURER VARCHAR(50) NOT NULL,"
                        " MODEL VARCHAR(50) NOT NULL,"

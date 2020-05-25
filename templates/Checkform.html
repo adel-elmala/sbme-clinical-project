@@ -15,14 +15,13 @@
     
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
 
-    <title>Check form</title>
+    <title>{{ reportType }}</title>
   </head>
   <body>
     <nav class = "nav3">
         <a href="{{ url_for('home') }}">Home</a>
-        <a href="{{ url_for('signin') }}">SIGNIN</a>
-        
-        <a href="{{ url_for('contact_form') }}">CONTACT </a>
+        <a href="{{ url_for(dep + 'PPMReports') }}">PPM Reports</a>
+        <a href="{{ url_for(dep + 'Sterilization') }}">Sterilization</a>
         <div id="indicator"></div>
       </nav>
 
@@ -34,44 +33,29 @@
        
         
         <div class="contr" >
-                <h2> Form</h2>
-                <form class="frm" action="{{ url_for('signin') }}" method="POST">
+                <h2> {{ reportType }} </h2>
+                <form class="frm" method="POST">
                   
-		
                   <dl class="check-list-right">
-                    <dt>Question?</dt>
-                  
+                    {% for i in range(len) %}
+                    
+                    <dt>{{ arr[i] }}, {{ arr2[i] }}</dt>
+                    {% for j in range(lens[i]) %}
                     <dd>
-                      <input type="checkbox" name="pq4" id="pq4-1" value="1">
-                      <label class='check' for="pq4-1">Answer1</label>
+                      <input type="checkbox" id="{{ ids[i][j] }}" value="{{ ids[i][j] }}">
+                      <label class='check' for="{{ ids[i][j] }}">{{ rows[i][j] }}</label>
                     </dd>
-                    <dd>
-                      <input type="checkbox" name="pq4" id="pq4-2" value="2" checked="checked">
-                      <label class='check' for="pq4-2">Answer2</label>
-                    </dd>
-                    <dd>
-                      <input type="checkbox" name="pq4" id="pq4-3"value="3" >
-                      <label class='check' for="pq4-3">Answer3</label>
-                    </dd>
-                    <dd>
-                      <input type="checkbox" name="pq4" id="pq4-4" value="4">
-                      <label  class='check' for="pq4-4">Answer4</label>
-                    </dd>
-                    <dd>
-                      <input type="checkbox" name="pq4" id="pq4-5"value="5" checked="checked">
-                      <label class='check' for="pq4-5">Answer5</label>
-                    </dd>
-                    <dd>
-                      <input type="checkbox" name="pq4" id="pq4-6"value="6" checked="checked">
-                      <label class='check' for="pq4-6">Answer6</label>
-                    </dd>
+                    {% endfor %}
+                    
+                    <fieldset class="frm-fieldset ui-input __third">
+                    <textarea name="{{ arr[i] }}" rows="10" cols="37"></textarea>
+                    <label for="message">
+                        <span data-text="message">Maintainance Report</span>
+                    </label>
+                    </fieldset>
+                    {% endfor %}
                   </dl>                  
                   
-                  {% if message != "" %}
-                  <div>
-                    <p>{{ message }}</p>
-                  </div> 
-                  {% endif %}  
                                     <!--USER VALIDATION HERE -->
                   <div class="frm-footer">
                     <button class="btn" >Submit</button>
@@ -82,7 +66,7 @@
               <!-- <a href="http://127.0.0.1:5000/contact-form">Contact us</a> -->
               
     </div>
-      </div>
+    </div>
       
 
     <script type="text/javascript" src="../styles/app.js"></script>

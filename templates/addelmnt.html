@@ -19,15 +19,9 @@
   <body>
     <nav class="nav3">
     
-      
-      
 
       <a href="{{ url_for('home') }}">HOME</a>
-        <a href="{{ url_for('signin') }}">SIGNIN</a>
-        
-        <a href="{{ url_for('contact_form') }}">CONTACT </a>
 
-      <div id="indicator"></div>
     </nav>
 
     
@@ -38,10 +32,13 @@
         <div class="contr" >
              
                 <h2> Add Equipment</h2>
-                <form class="frm" action={{ url_for('signup') }} method="POST">
+                {% if message != "" %}
+                <h3>{{ message }}</h3>
+                {% endif %}
+                <form class="frm" action={{ url_for('addElement') }} method="POST">
                   <div>
                     <fieldset class="frm-fieldset ui-input __first">
-                      <input type="text" id="EqName" tabindex="0" name="EqName" />
+                      <input type="text" id="EqName" tabindex="0" name="eqName" />
                       <label for="EqName" >
                         <span data-text="Equipment name">Equipment name</span>
                       </label>
@@ -50,7 +47,7 @@
 
                   <div>
                   <fieldset class="frm-fieldset ui-input __second">
-                        <input type="text" id="Department" tabindex="0" name="Department" />
+                        <input type="text" id="Department" tabindex="0" name="department" />
                         <label for="Department">
                           <span data-text="Department">Department</span>
                         </label>
@@ -58,7 +55,7 @@
                     </div>
                     <div>
                   <fieldset class="frm-fieldset ui-input __third">
-                        <input type="text" id="Manufactrer" tabindex="0" name="Manufactrer" />
+                        <input type="text" id="Manufactrer" tabindex="0" name="manufacturer" />
                         <label for="Manufactrer">
                           <span data-text="Manufactrer">Manufactrer</span>
                         </label>
@@ -66,7 +63,7 @@
                     </div>
                     <div>
                       <fieldset class="frm-fieldset ui-input __fourth">
-                            <input type="text" id="Model" name="Model" />
+                            <input type="text" id="Model" name="model" />
                             <label for="Model">
                               <span data-text="Model">Model</span>
                             </label>
@@ -74,7 +71,7 @@
                         </div>
                         <div>
                       <fieldset class="frm-fieldset ui-input __fifth">
-                        <input type="SerialNumber" id="SerialNumber" name="SerialNumber" />
+                        <input type="SerialNumber" id="SerialNumber" name="serialNumber" />
                         <label for="SerialNumber">
                           <span data-text="SerialNumber">Serial Number</span>
                         </label>
@@ -82,7 +79,7 @@
                     </div>
                     <div>
                     <fieldset class="frm-fieldset ui-input __fifth">
-                      <input type="Country" id="Country" name="Country" />
+                      <input type="Country" id="Country" name="country" />
                       <label for="Country">
                         <span data-text="Country">Manufacturer Country</span>
                       </label>
@@ -90,61 +87,61 @@
 
 
                     <fieldset class="frm-fieldset ui-input __fifth">
-                        <input type="InDate" id="InDate" name="InDate" />
+                        <input type="InDate" id="InDate" name="inDate" />
                         <label for="InDate">
                           <span data-text="InDate">Installation Date</span>
                         </label>
                       </fieldset>
                       <fieldset class="frm-fieldset ui-input __fifth">
-                        <input type="OpDate" id="OpDate" name="OpDate" />
+                        <input type="OpDate" id="OpDate" name="opDate" />
                         <label for="OpDate">
                           <span data-text="OpDate">Operation Date</span>
                         </label>
                       </fieldset>
                       <fieldset class="frm-fieldset ui-input __fifth">
-                        <input type="Period" id="Period" name="Period" />
+                        <input type="Period" id="Period" name="period" />
                         <label for="Period">
                           <span data-text="Period">Warranty Period</span>
                         </label>
                       </fieldset>
                       <fieldset class="frm-fieldset ui-input __fifth">
-                        <input type="Supplier" id="Supplier" name="Supplier" />
+                        <input type="Supplier" id="Supplier" name="supplier" />
                         <label for="Supplier">
                           <span data-text="Supplier">Supplier</span>
                         </label>
                       </fieldset>
                       <fieldset class="frm-fieldset ui-input __fifth">
-                        <input type="Price" id="Price" name="Price" />
+                        <input type="Price" id="Price" name="price" />
                         <label for="Price">
                           <span data-text="Price">Price</span>
                         </label>
                       </fieldset>
                       <fieldset class="frm-fieldset ui-input __fifth">
-                        <input type="Company" id="Company" name="Company" />
+                        <input type="Company" id="Company" name="company" />
                         <label for="Company">
                           <span data-text="Company">Maintainance Company</span>
                         </label>
                       </fieldset>
                       <fieldset class="frm-fieldset ui-input __fifth">
-                        <input type="CType" id="CType" name="CType" />
+                        <input type="CType" id="CType" name="cType" />
                         <label for="CType">
                           <span data-text="CType">Maintainance Contract Type</span>
                         </label>
                       </fieldset>
                       <fieldset class="frm-fieldset ui-input __fifth">
-                        <input type="Cdate" id="Cdate" name="Cdate" />
+                        <input type="Cdate" id="Cdate" name="cDate" />
                         <label for="Cdate">
                           <span data-text="Cdate">Start/End Date of Contract</span>
                         </label>
                       </fieldset>
                       <fieldset class="frm-fieldset ui-input __fifth">
-                        <input type="RName" id="RName" name="RName" />
+                        <input type="RName" id="RName" name="rName" />
                         <label for="RName">
                           <span data-text="RName">Recipient Name</span>
                         </label>
                       </fieldset>
                       <fieldset class="frm-fieldset ui-input __fifth">
-                        <input type="Rphone" id="Rphone" name="Rphone" />
+                        <input type="Rphone" id="Rphone" name="rPhone" />
                         <label for="Rphone">
                           <span data-text="Rphone">Recipient Phone</span>
                         </label>

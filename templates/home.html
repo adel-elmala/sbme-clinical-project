@@ -23,13 +23,6 @@
   <body>
     <nav class = "nav3">
         <a href="{{ url_for('home') }}">HOME</a>
-        {% if loggedin %}
-        <a href="{{ url_for('signout') }}">SIGNOUT</a>
-        {% else %}
-        <a href="{{ url_for('signin') }}">SIGNIN</a>
-        {% endif %}
-        <a href="{{ url_for('contact_form') }}">CONTACT </a>
-        <div id="indicator"></div>
       </nav>
 
 
@@ -47,7 +40,7 @@
                   <div class='hexagon'id='hidden'><span title='theme'></span></div> 
                 </div>
                 <div class='hexr'>
-                  <div class='hexagon'><a href="{{ url_for('chatheter') }}"><span  title='Chatheter' style="color:white"><i class='fa fa-medkit fa-sm'style="color:white"></i></span></a></div>
+                  <div class='hexagon'><a href="{{ url_for('chathetar') }}"><span  title='Chatheter' style="color:white"><i class='fa fa-medkit fa-sm'style="color:white"></i></span></a></div>
                   <div class='hexagon'><a href="{{ url_for('cardiac') }}"><span title='Cardiac' style="color:white"><i class='fa fa-heartbeat fa-sm'style="color:white"></i></span></a></div>
                 </div>
                 <!-- <div class='hexr'>

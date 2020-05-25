@@ -19,13 +19,6 @@
   <body>
     <nav class = "nav3">
       <a href="{{ url_for('home') }}">HOME</a>
-      {% if loggedin %}
-      <a href="{{ url_for('signout') }}">SIGNOUT</a>
-      {% else %}
-      <a href="{{ url_for('signin') }}">SIGNIN</a>
-      {% endif %}
-      
-      <a href="{{ url_for('contact_form') }}">CONTACT </a>
       <div id="indicator"></div>
     </nav>
 
@@ -39,7 +32,7 @@
               <h2> Contact us</h2>
               <form class="frm" action="{{ url_for('contact_form') }}">
                 
-                <fieldset class="frm-fieldset ui-input __first">
+                <!-- <fieldset class="frm-fieldset ui-input __first">
                   <input type="text" id="name" tabindex="0" />
                   <label for="name">
                     <span data-text="name">name</span>
@@ -51,9 +44,9 @@
                   <label for="email">
                     <span data-text="email">email</span>
                   </label>
-                </fieldset>
+                </fieldset> -->
                 <fieldset class="frm-fieldset ui-input __third">
-                  <textarea name="message" rows="10" cols="37">
+                  <textarea name="{{ {% 'message' + str(i) %} }}" rows="10" cols="37">
                           
                           </textarea>
                   <label for="message">

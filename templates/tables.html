@@ -21,12 +21,8 @@
   <body>
     <nav class = "nav3">
         <a href="{{ url_for('home') }}">HOME</a>
-		{% if loggedin %}
-		<a href="{{ url_for('signout') }}">SIGNOUT</a>
-		{% else %}
-		<a href="{{ url_for('signin') }}">SIGNIN</a>
-		{% endif %}
-        <a href="{{ url_for('contact_form') }}">CONTACT </a>
+        <a href="{{ url_for(dep + 'PPMReports') }}">PPM Reports</a>
+        <a href="{{ url_for(dep + 'Sterilization') }}">Sterilization</a>
         <div id="indicator"></div>
       </nav>
 
@@ -37,12 +33,14 @@
     <div class="containers">
         <h1>Equipment-CMMS</h1>
 		<div style="margin-left: 42%;margin-bottom: 10px;" >
-			<button class="btn form-popup" >ADD</button>
-			<button class="btn form2-popup" >Remove</button>
+			<a class="btn form-popup" href="{{ url_for('addElement') }}">ADD</a>
+			<a class="btn form2-popup" >Remove</a>
 			
 		  </div>
 <div class="container">
 	
+	{% if data %}
+	{% for row in data %}
 	<table>
 		<thead>
 			<tr>
@@ -50,8 +48,6 @@
 				<th>Value</th>
 			</tr>
 		</thead>
-		{% if data %}
-		{% for row in data %}
 		<tbody>
 			{% for i in range(16) %}
 			<tr>
@@ -60,19 +56,10 @@
 			</tr>
 			{% endfor %}
 		</tbody>
-		{% endfor %}
-		{% else %}
-		<tbody>
-			{% for i in range(16) %}
-			<tr>
-				<td>{{ arr[i] }}</td>
-				<td></td>
-			</tr>
-			{% endfor %}
-		</tbody>
-		{% endif %}
 		
 	</table>
+	{% endfor %}
+	{% endif %}
 </div>
 </div>
 </div>
