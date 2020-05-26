@@ -23,16 +23,22 @@
   <body>
     <nav class = "nav3">
         <a href="{{ url_for('home') }}">HOME</a>
-        <a href="{{ url_for('signin') }}">SIGNIN</a>
-        <a href="{{ url_for('contact_form') }}">CONTACT </a>
+        <a href="{{ url_for(dep + 'PPMReports') }}">PPM Reports</a>
+        <a href="{{ url_for(dep + 'Sterilization') }}">Sterilization</a>
+        <a href="{{ url_for(dep + 'Maintainance') }}">Maintainance</a>
         <div id="indicator"></div>
       </nav>
-
-
-
+      
       <div class="content">
         
-        <div class="containers">
+        <div class="containers" style="text-align: center; color: aliceblue;">
+          
+                {% if data %}
+                {% for row in data %}
+                <h3>{{ row[1] }}, {{ row[2] }}</h3>
+                <p>{{ row[3] }}</p>
+                {% endfor %}
+                {% endif %}
         
                 
          

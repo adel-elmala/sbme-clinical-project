@@ -33,7 +33,7 @@
              
                 <h2> Add Equipment</h2>
                 {% if message != "" %}
-                <h3>{{ message }}</h3>
+                <h3 style="color: aliceblue;">{{ message }}</h3>
                 {% endif %}
                 <form class="frm" action={{ url_for('addElement') }} method="POST">
                   <div>

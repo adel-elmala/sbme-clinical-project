@@ -107,7 +107,7 @@ def addElement():
 	if request.method == "GET":
 		return render_template("addelmnt.html", loggedin=check_logged_in())
 	elif request.method == "POST":
-		sql = ("INSERT INTO EQUIPMENT (DEPARTMENT, ID, SERIAL_NUMBER, MANUFACTURER, MODEL,"
+		sql = ("INSERT INTO EQUIPMENT (DEPARTMENT, NAME, SERIAL_NUMBER, MANUFACTURER, MODEL,"
 			  " INDATE, OPERATION_DATE, SUPPLIER, WARRANTY_PERIOD, PRICE, MAINTAINANCE_COMPANY,"
 			  " MAINTAINANCE_CONTRACT_TYPE, START_END_CONTRACT_DATE, RECIPIENT_NAME,"
 			  " RECIPIENT_PHONE, MANUFACTURER_COUNTRY) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s,"
@@ -115,14 +115,18 @@ def addElement():
 		val = (get("department"), get("eqName"), get("serialNumber"), get("manufacturer"),
 		get("model"), get("inDate"), get("opDate"), get("supplier"), get("period"), get("price"),
 		get("company"), get("cType"), get("cDate"), get("rName"), get("rPhone"), get("country"))
-		db.execute(sql, val)
-		mydb.commit()
-		return render_template("addelmnt.html", loggedin=check_logged_in(), message="Equipment Added successfully!")
+		
+		try:
+			db.execute(sql, val)
+			mydb.commit()
+			message = "Equipment Added successfully!"
+		except mysql.connector.Error as err:
+			message = "Equipment already in database."
+		return render_template("addelmnt.html", message=message)
 
 
 def report(dep : str, reportType):
 	v = (dep, )
-	print(reportType)
 	db.execute("SELECT * FROM `{}` WHERE `DEPARTMENT` = (%s)".format(reportType), v)
 	data = db.fetchall()
 	rows = []
@@ -212,6 +216,23 @@ def dentalSterilization():
 	elif request.method == "POST":
 		return maintainanceReport("dental", 'STERILIZATION')
 
+@app.route("/chathertar/maintainance")
+def chathetarMaintainance():
+	db.execute("SELECT * FROM `MAINTANANCE_REPORTS` WHERE DEPARTMENT = 'chathetar'")
+	data = db.fetchall()
+	return render_template("containerTemp.html", data=data, dep='chathetar')
+
+@app.route("/cardiac/maintainance")
+def cardiacMaintainance():
+	db.execute("SELECT * FROM `MAINTANANCE_REPORTS` WHERE DEPARTMENT = 'cardiac'")
+	data = db.fetchall()
+	return render_template("containerTemp.html", data=data, dep='cardiac')
+
+@app.route("/dental/maintainance")
+def dentalMaintainance():
+	db.execute("SELECT * FROM `MAINTANANCE_REPORTS` WHERE DEPARTMENT = 'dental'")
+	data = db.fetchall()
+	return render_template("containerTemp.html", data=data, dep='dental')
 
 
 if __name__ == "__main__":
