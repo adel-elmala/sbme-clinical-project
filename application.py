@@ -170,7 +170,7 @@ def maintainanceReport(dep : str, reportType):
 		db.execute(sql, val)
 		mydb.commit()
 	if reportType[0] == 'S':
-		return redirect(url_for(dep + 'Sterilizatio'))
+		return redirect(url_for(dep + 'Sterilization'))
 	else:
 		return redirect(url_for(dep + 'PPMReports'))
 
