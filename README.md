@@ -10,7 +10,7 @@
 - **Name** : Bishoy Magdi | **Sec** : 1 | **B.N** : 24 | **Email** : bishoymagdi626@gmail.com
 
 # Brief overview
-CMMS Database site that stores data related to medical equipments in Cardiac, Catherter and Dental departments and reports there sterilization and maintenance info. and hosts ppm reports online for more convenience and instant feedback to the system.
+CMMS Database site that stores data related to medical equipments in Cardiac, Catherter and Dental departments and reports their sterilization and PPM info. and hosts the reports online for more convenience, And instant feedback to the system.
 
 # Project UI
 
