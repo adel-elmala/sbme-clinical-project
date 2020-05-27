@@ -2,12 +2,12 @@
 
 ## Team members
 
-- **Name** : Mahmoud Abd Elmonem Abd Elgawwad | **Sec** : 2  | **B.N** : 26
-- **Name** : Adel Refat Ali | **Sec** : 2 | **B.N** : 3 
-- **Name** : | **Sec** : | **B.N** : 
-- **Name** : kirolos Dawood Soliman | **Sec** : 2 | **B.N** : 15
-- **Name** : | **Sec** : | **B.N** : 
-- **Name** : Bishoy Magdi | **Sec** : 1 | **B.N** : 24 
+- **Name** : Mahmoud Abd Elmonem Abd Elgawwad | **Sec** : 2  | **B.N** : 26 | **Email** : hooodamonem111@gmail.com
+- **Name** : Adel Refat Ali | **Sec** : 2 | **B.N** : 3 | **Email** : adel.elmala2025@gmail.com
+- **Name** : Ahmed Nabil Salem| **Sec** :1 | **B.N** : 10 | **Email** :ahmednaza7@gmail.com 
+- **Name** : kirolos Dawood Soliman | **Sec** : 2 | **B.N** : 15 | **Email** : kirolosdawood88@gmail.com
+- **Name** : Ahmed Osama Mohamed | **Sec** : 1 | **B.N** : 2 | **Email** : ahmedosamam.negm@gmail.com
+- **Name** : Bishoy Magdi | **Sec** : 1 | **B.N** : 24 | **Email** : bishoymagdi626@gmail.com
 
 # Brief overview
 **CMMMS Database site that stores data related to medical equipments in Cardiac, Catherter and Dental departments and reports there sterilization and maintenance info. and hosts ppm reports online for more convenience and instant feedback to the system.**
